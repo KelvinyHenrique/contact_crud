@@ -3,18 +3,37 @@
     include 'contato.php';
 
   $contato = new Contato();
-  #$contato->adicionar('kelvinyhenrique17@gmail.com', 'Kelviny');
-  #$contato->adicionar('suporte@b7web.com.br');
-  #$nome = $contato->getNome('suporte@b7web.com.br');
-  #$lista = $contato->getAll();
-  #$contato->editar('Gilson', 'suporte@b7web.com.br'); 
-  #$contato->excluir('suporte@b7web.com.br');
-  #print_r($lista);
-  $excluir = $contato->excluir('suporte@b7web.com.br');
-  if($excluir == true) {
-    echo "Foi excluido";
-  } else {
-    echo "Não foi excluido";
-  }
 
-?>
+
+?>  
+
+<h1>Contatos</h1>
+<br/>
+
+<a href="adicionar.php"><button>Adicionar</button></a>
+<br/>
+<br/>
+<br/>
+<table border="1" width="600">
+    <tr>
+        <th>ID</th>
+        <th>NOME</th>
+        <th>EMAIL</th>
+        <th>AÇÕES</th>
+        <?php 
+          $lista = $contato->getAll();
+          foreach($lista as $item): ?>
+          <tr>
+          <td><?php echo $item['id'];?></td>
+          <th><?php echo $item['nome'];?></th>
+          <td><?php echo $item['email'];?></td>
+          <td>
+            <a href="editar.php?id=<?php echo $item['id']; ?>"><button>Editar</button></a>
+            <a href="excluir.php?id=<?php echo $item['id'];?>"><button>Excluir</button></a>
+          </td>
+          </tr>
+
+          <?php endforeach ?>
+
+    </tr>
+</table>
